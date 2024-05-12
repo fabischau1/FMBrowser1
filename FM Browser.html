@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM Browser</title>
+    <style>
+        /* Füge hier deine benutzerdefinierten CSS-Stile hinzu */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            background-image: url('FMBackground.jpg');
+            background-size: cover;
+            background-position: center;
+            animation: fadeIn 1s ease-out; /* Animation beim Laden der Seite */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+            animation: slideInDown 1s ease-out; /* Animation für den Header */
+        }
+        .content {
+            margin: 50px auto;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: slideInUp 1s ease-out; /* Animation für den Inhalt */
+        }
+        input[type="text"],
+        input[type="submit"],
+        button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #4285f4;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease; /* Sanfter Farbübergang bei Hover */
+        }
+        input[type="text"]:focus,
+        input[type="submit"]:focus,
+        button:focus {
+            outline: none;
+        }
+        input[type="text"]::placeholder {
+            color: #ccc;
+        }
+        input[type="submit"],
+        button {
+            background-color: #4285f4;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #3367d6;
+        }
+        .example-links a {
+            display: block;
+            margin-bottom: 10px;
+            color: #4285f4;
+            text-decoration: none;
+            transition: color 0.3s ease; /* Sanfter Farbübergang bei Hover */
+        }
+        .example-links a:hover {
+            color: #3367d6;
+        }
+        .password-generator,
+        .url-scanner {
+            margin-top: 20px;
+            animation: fadeIn 1s ease-out; /* Animation für die Abschnitte */
+        }
+        .password-generator h3,
+        .url-scanner h3 {
+            color: #4285f4;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Welcome to the FM Browser</div>
+    <div class="content">
+        <form method="get" action="http://www.google.de/search" target="_blank">
+            <input name="q" type="text" size="45" maxlength="255" placeholder="Search with Google" />
+            <input type="submit" value="Search" />
+        </form>
+        <div class="example-links">
+            <a href="https://www.youtube.com">YouTube</a>
+            <a href="https://copilot.microsoft.com">Co Pilot</a>
+            <a href="https://www.virustotal.com/gui/home/url">Virus Total</a>
+            <a href="https://fabischau1.github.io/FA_Software/">FA Antivira</a>
+            <a href="https://discord.com">Discord</a>
+        </div>
+        <div class="password-generator">
+            <h3>Passwort-Generator</h3>
+            <button onclick="generatePassword()">Generate Password</button>
+            <input type="text" id="password" readonly>
+        </div>
+        <div class="url-scanner">
+            <h3>URL-Scanner</h3>
+            <input type="text" id="urlInput" placeholder="Type in a url">
+            <button onclick="scanUrl()">Scan</button>
+            <p id="scanResult"></p>
+        </div>
+    </div>
+
+    <script>
+        function generatePassword() {
+            var length = 14;
+            var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var password = "";
+            for (var i = 0; i < length; i++) {
+                password += charset.charAt(Math.floor(Math.random() * charset.length));
+            }
+            document.getElementById("password").value = password;
+        }
+
+        function scanUrl() {
+            var url = document.getElementById("urlInput").value;
+            if (url.startsWith("http://")) {
+                document.getElementById("scanResult").innerText = "Die URL '" + url + "' has unsafe data transfer.";
+            } else if (url.startsWith("https://")) {
+                document.getElementById("scanResult").innerText = "Die URL '" + url + "' has safe data transfer.";
+            } else {
+                document.getElementById("scanResult").innerText = "The URL is not available.";
+            }
+        }
+    </script>
+</body>
+</html>
